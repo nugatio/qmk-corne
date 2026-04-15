@@ -38,13 +38,11 @@ jobs:
           # Remove the github folder from the keymap copy so QMK doesn't get confused
           rm -rf ./qmk_firmware/keyboards/crkbd/keymaps/nugatio/.github
 
-      - name: Compile Left and Right EE_HANDS firmware (RP2040)
+      - name: Compile firmware (RP2040)
         run: |
           cd qmk_firmware
-          # Build the Left half specific UF2
-          make crkbd:nugatio:uf2-split-left CONVERT_TO=rp2040_ce
-          # Build the Right half specific UF2
-          make crkbd:nugatio:uf2-split-right CONVERT_TO=rp2040_ce
+          # The standard compile command that outputs cleanly without waiting for USB
+          qmk compile -kb crkbd -km nugatio -e CONVERT_TO=rp2040_ce
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

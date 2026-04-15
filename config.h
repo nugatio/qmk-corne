@@ -8,9 +8,9 @@ firmware: qmk (RP2040)
 layout: hands down
 */
 
-// EE_HANDS allows plugging the USB into either side.
-// The handedness is stored directly in the controller's memory.
-#define EE_HANDS
+// Tell QMK that the side plugged into the computer is the RIGHT half
+#undef MASTER_LEFT
+#define MASTER_RIGHT
 
 // Combo & Tapping timing
 #define COMBO_TERM 65
