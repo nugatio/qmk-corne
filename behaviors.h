@@ -34,8 +34,8 @@ const key_override_t ko_voldn_next = ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, KC_M
 // Backspace with layer access that works with modifiers
 const key_override_t ko_bspc_sbspc = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, LALT(KC_BSPC));
 
-// Register all overrides globally
-const key_override_t **key_overrides = (const key_override_t *[]){
+// Register all overrides globally (Fixed array syntax here)
+const key_override_t *key_overrides[] = {
     &ko_excl_qmrk,
     &ko_fslh_star,
     &ko_hash_dllr,

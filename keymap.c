@@ -23,11 +23,11 @@ enum layers {
 // DEFINITION
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    /* base layer layout
+    /* base layer layout (Fixed the / * ascii art here so the C compiler doesn't panic)
          ╭─────────────────────╮ ╭─────────────────────╮
     ESC  │  X   W   M   G   !? │ │ #$  .:  "'   J   B  │ VUP/PRV
     Z    │  S   C   N   T   K  │ │ ,;   A   E   I   H  │ VM/PP
-    CAPS │  V   P   L   D   /* │ │ -+   U   O   Y   F  │ VDN/NXT
+    CAPS │  V   P   L   D  / * │ │ -+   U   O   Y   F  │ VDN/NXT
          ╰───────╮  Q   R  BSP │ │ SPC RET TAB ╭───────╯
                  ╰─────────────╯ ╰─────────────╯
     */
