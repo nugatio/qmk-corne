@@ -1,0 +1,26 @@
+name: Build QMK Firmware
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build Firmware
+        uses: qmk/qmk-action@main
+        with:
+          keyboard: crkbd
+          keymap: nugatio
+          args: -e CONVERT_TO=promicro_rp2040
+
+      - name: Archive UF2 Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: nugatio-corne-rp2040-firmware
+          path: '*.uf2'
