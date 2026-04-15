@@ -38,16 +38,17 @@ jobs:
           # Remove the github folder from the keymap copy so QMK doesn't get confused
           rm -rf ./qmk_firmware/keyboards/crkbd/keymaps/nugatio/.github
 
-      - name: Compile firmware (RP2040)
+      - name: Compile Left and Right EE_HANDS firmware (RP2040)
         run: |
           cd qmk_firmware
-          # The -e CONVERT_TO=rp2040_ce flag forces targeting for generic RP2040 Pro Micro clones.
-          # (If you are using genuine SparkFun boards, change this to sparkfun_pm2040)
-          qmk compile -kb crkbd -km nugatio -e CONVERT_TO=rp2040_ce
+          # Build the Left half specific UF2
+          make crkbd:nugatio:uf2-split-left CONVERT_TO=rp2040_ce
+          # Build the Right half specific UF2
+          make crkbd:nugatio:uf2-split-right CONVERT_TO=rp2040_ce
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: nugatio-corne-rp2040-firmware
           path: qmk_firmware/*.uf2
-          compression-level: 0 # 0 prevents double-zipping the binary, downloading instantly
+          compression-level: 0

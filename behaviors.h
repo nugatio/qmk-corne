@@ -31,10 +31,15 @@ const key_override_t ko_volup_prev = ko_make_basic(MOD_MASK_SHIFT, KC_VOLU, KC_M
 const key_override_t ko_volmute_pp = ko_make_basic(MOD_MASK_SHIFT, KC_MUTE, KC_MPLY);
 const key_override_t ko_voldn_next = ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, KC_MNXT);
 
-// Backspace with layer access that works with modifiers
-const key_override_t ko_bspc_sbspc = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, LALT(KC_BSPC));
+// Backspace / Delete with layer access that works with modifiers
+// FIX: QMK requires the exact 16-bit Layer-Tap keycode to override dual-role keys.
+const key_override_t ko_bspc_lt = ko_make_basic(MOD_MASK_SHIFT, LT(NPFN, KC_BSPC), LALT(KC_BSPC));
 
-// Register all overrides globally (Fixed array syntax here)
+// Also catching standard BSPC and DEL just in case they are tapped on other layers
+const key_override_t ko_bspc_std = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, LALT(KC_BSPC));
+const key_override_t ko_del_std = ko_make_basic(MOD_MASK_SHIFT, KC_DEL, LALT(KC_DEL));
+
+// Register all overrides globally
 const key_override_t *key_overrides[] = {
     &ko_excl_qmrk,
     &ko_fslh_star,
@@ -46,6 +51,8 @@ const key_override_t *key_overrides[] = {
     &ko_volup_prev,
     &ko_volmute_pp,
     &ko_voldn_next,
-    &ko_bspc_sbspc,
+    &ko_bspc_lt,
+    &ko_bspc_std,
+    &ko_del_std,
     NULL // MUST end with NULL
 };
