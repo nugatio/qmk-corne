@@ -2,25 +2,52 @@ name: Build QMK Firmware
 
 on:
   push:
-    branches: [ main ]
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Build Firmware
-        uses: qmk/qmk-action@main
+      - name: Checkout user keymap
+        uses: actions/checkout@v4
         with:
-          keyboard: crkbd
-          keymap: nugatio
-          args: -e CONVERT_TO=promicro_rp2040
+          path: user_keymap
 
-      - name: Archive UF2 Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Checkout official QMK firmware
+        uses: actions/checkout@v4
+        with:
+          repository: qmk/qmk_firmware
+          path: qmk_firmware
+          submodules: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup QMK CLI
+        run: |
+          python3 -m pip install qmk
+          qmk setup -H ./qmk_firmware -y
+
+      - name: Copy keymap into QMK directory
+        run: |
+          mkdir -p ./qmk_firmware/keyboards/crkbd/keymaps/nugatio
+          # Copy your repo's code into the correct QMK directory structure
+          cp -r ./user_keymap/* ./qmk_firmware/keyboards/crkbd/keymaps/nugatio/
+          # Remove the github folder from the keymap copy so QMK doesn't get confused
+          rm -rf ./qmk_firmware/keyboards/crkbd/keymaps/nugatio/.github
+
+      - name: Compile firmware (RP2040)
+        run: |
+          cd qmk_firmware
+          # The -e CONVERT_TO=promicro_rp2040 flag forces RP2040 targeting
+          qmk compile -kb crkbd -km nugatio -e CONVERT_TO=promicro_rp2040
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: nugatio-corne-rp2040-firmware
-          path: '*.uf2'
+          path: qmk_firmware/*.uf2
+          compression-level: 0 # 0 prevents double-zipping the binary, downloading instantly
