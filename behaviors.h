@@ -9,7 +9,7 @@ layout: hands down
 */
 
 // In QMK, Mod-Morphs are handled via Key Overrides.
-// We intercept the base key when Shift is held and output the alternate key.
+// We intercept the base physical key when Shift is held and output the alternate key.
 
 // shift_excl_qmrk
 const key_override_t ko_excl_qmrk = ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_QUES);
@@ -25,15 +25,13 @@ const key_override_t ko_minus_plus = ko_make_basic(MOD_MASK_SHIFT, KC_MINS, KC_P
 const key_override_t ko_dot_colon = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLN);
 // shift_dqt_sqt
 const key_override_t ko_dqt_sqt = ko_make_basic(MOD_MASK_SHIFT, KC_DQUO, KC_QUOT);
-// shift_volup_prev
+
+// Media
 const key_override_t ko_volup_prev = ko_make_basic(MOD_MASK_SHIFT, KC_VOLU, KC_MPRV);
-// shift_volmute_pp
 const key_override_t ko_volmute_pp = ko_make_basic(MOD_MASK_SHIFT, KC_MUTE, KC_MPLY);
-// shift_voldn_next
 const key_override_t ko_voldn_next = ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, KC_MNXT);
 
 // Backspace with layer access that works with modifiers
-// Replaces msbb: Base map will hold LT(NPFN, KC_BSPC). This override catches the Shift+Tap.
 const key_override_t ko_bspc_sbspc = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, LALT(KC_BSPC));
 
 // Register all overrides globally

@@ -21,13 +21,12 @@ jobs:
           path: qmk_firmware
           submodules: true
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Setup QMK CLI
+      - name: Setup Build Environment
         run: |
+          # Install the ARM GCC toolchain required for RP2040 compilation
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi
+          # Setup QMK
           python3 -m pip install qmk
           qmk setup -H ./qmk_firmware -y
 
@@ -42,8 +41,9 @@ jobs:
       - name: Compile firmware (RP2040)
         run: |
           cd qmk_firmware
-          # The -e CONVERT_TO=promicro_rp2040 flag forces RP2040 targeting
-          qmk compile -kb crkbd -km nugatio -e CONVERT_TO=promicro_rp2040
+          # The -e CONVERT_TO=rp2040_ce flag forces targeting for generic RP2040 Pro Micro clones.
+          # (If you are using genuine SparkFun boards, change this to sparkfun_pm2040)
+          qmk compile -kb crkbd -km nugatio -e CONVERT_TO=rp2040_ce
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

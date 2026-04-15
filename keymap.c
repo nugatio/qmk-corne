@@ -8,9 +8,6 @@ firmware: qmk (RP2040)
 layout: hands down
 */
 
-// IMPORTS
-#include "config.h"
-
 // layer names
 enum layers {
     BASE = 0,
@@ -36,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     */
     [BASE] = LAYOUT_split_3x6_3(
         KC_ESC,  KC_X,         KC_W,         KC_M,         KC_G,         KC_EXLM,             KC_HASH, KC_DOT,       KC_DQUO,      KC_J,         KC_B,         KC_VOLU,
-        KC_Z,    LCTL_T(KC_S), LALT_T(KC_C), LCMD_T(KC_N), LSFT_T(KC_T), KC_K,                KC_COMM, RSFT_T(KC_A), RCMD_T(KC_E), RALT_T(KC_I), RCTL_T(KC_H), KC_MUTE,
+        KC_Z,    LCTL_T(KC_S), LALT_T(KC_C), LGUI_T(KC_N), LSFT_T(KC_T), KC_K,                KC_COMM, RSFT_T(KC_A), RGUI_T(KC_E), RALT_T(KC_I), RCTL_T(KC_H), KC_MUTE,
         KC_CAPS, KC_V,         KC_P,         KC_L,         KC_D,         KC_SLSH,             KC_MINS, KC_U,         KC_O,         KC_Y,         KC_F,         KC_VOLD,
                                              KC_Q,         LT(NAVI,KC_R),LT(NPFN,KC_BSPC),    LT(SYMB,KC_SPC), LT(NAVI,KC_ENT), KC_TAB
     ),

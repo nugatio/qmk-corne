@@ -8,10 +8,13 @@ firmware: qmk (RP2040)
 layout: hands down
 */
 
-// timing
+// Combo & Tapping timing
 #define COMBO_TERM 65
 #define TAPPING_TERM 200
 
+// Debounce tuning (Standard QMK equivalent to ZMK 1ms press/7ms release eager debounce)
+#define DEBOUNCE 5
+
 // Homerow Mods Tuning (Mimics ZMK's flavor = "tap-preferred")
 #define PERMISSIVE_HOLD
-#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_FORCE_HOLD
