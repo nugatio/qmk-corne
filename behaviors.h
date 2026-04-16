@@ -2,14 +2,7 @@
 
 /*
 BEHAVIORS (Key Overrides)
-
-keyboard: corne (crkbd)
-firmware: qmk (RP2040)
-layout: hands down
 */
-
-// In QMK, Mod-Morphs are handled via Key Overrides.
-// We intercept the base physical key when Shift is held and output the alternate key.
 
 // shift_excl_qmrk
 const key_override_t ko_excl_qmrk = ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_QUES);
@@ -31,14 +24,6 @@ const key_override_t ko_volup_prev = ko_make_basic(MOD_MASK_SHIFT, KC_VOLU, KC_M
 const key_override_t ko_volmute_pp = ko_make_basic(MOD_MASK_SHIFT, KC_MUTE, KC_MPLY);
 const key_override_t ko_voldn_next = ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, KC_MNXT);
 
-// Backspace / Delete with layer access that works with modifiers
-// FIX: QMK requires the exact 16-bit Layer-Tap keycode to override dual-role keys.
-const key_override_t ko_bspc_lt = ko_make_basic(MOD_MASK_SHIFT, LT(NPFN, KC_BSPC), LALT(KC_BSPC));
-
-// Also catching standard BSPC and DEL just in case they are tapped on other layers
-const key_override_t ko_bspc_std = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, LALT(KC_BSPC));
-const key_override_t ko_del_std = ko_make_basic(MOD_MASK_SHIFT, KC_DEL, LALT(KC_DEL));
-
 // Register all overrides globally
 const key_override_t *key_overrides[] = {
     &ko_excl_qmrk,
@@ -51,8 +36,5 @@ const key_override_t *key_overrides[] = {
     &ko_volup_prev,
     &ko_volmute_pp,
     &ko_voldn_next,
-    &ko_bspc_lt,
-    &ko_bspc_std,
-    &ko_del_std,
-    NULL // MUST end with NULL
+    NULL
 };
