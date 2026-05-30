@@ -1,8 +1,17 @@
 #pragma once
 
 /*
-BEHAVIORS (Key Overrides)
+BEHAVIORS
+
+keyboard: corne (https://github.com/foostan/crkbd)
+firmware: qmk (https://docs.qmk.fm/)
+layout: hands down (https://sites.google.com/alanreiser.com/handsdown/)
+
+nb@2026.05.30
 */
+
+
+// ////////// KEY OVERRIDES //////////
 
 // shift_excl_qmrk
 const key_override_t ko_excl_qmrk = ko_make_basic(MOD_MASK_SHIFT, KC_EXLM, KC_QUES);
@@ -19,12 +28,17 @@ const key_override_t ko_dot_colon = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COL
 // shift_dqt_sqt
 const key_override_t ko_dqt_sqt = ko_make_basic(MOD_MASK_SHIFT, KC_DQUO, KC_QUOT);
 
-// Media
+
+// :::::::::: MEDIA ::::::::::
+
 const key_override_t ko_volup_prev = ko_make_basic(MOD_MASK_SHIFT, KC_VOLU, KC_MPRV);
 const key_override_t ko_volmute_pp = ko_make_basic(MOD_MASK_SHIFT, KC_MUTE, KC_MPLY);
 const key_override_t ko_voldn_next = ko_make_basic(MOD_MASK_SHIFT, KC_VOLD, KC_MNXT);
 
-// Register all overrides globally
+
+// :::::::::: REGISTRATION ::::::::::
+
+// register all overrides globally
 const key_override_t *key_overrides[] = {
     &ko_excl_qmrk,
     &ko_fslh_star,

@@ -1,16 +1,19 @@
 # RULES
 #
-# keyboard: corne (crkbd)
-# firmware: qmk (RP2040)
-# layout: hands down
+# keyboard: corne (https://github.com/foostan/crkbd)
+# firmware: qmk (https://docs.qmk.fm/)
+# layout: hands down (https://sites.google.com/alanreiser.com/handsdown/)
 #
-# nugatio@2024.09.20 -> Translated to QMK
+# nb@2026.05.30
 
-# Enable Combos
+
+# ////////// CONFIG //////////
+
+# enable combos
 COMBO_ENABLE = yes
 
-# Enable Key Overrides (Used to 1:1 replace ZMK Mod-Morphs)
+# enable key overrides (used to 1:1 replace zmk mod-morphs)
 KEY_OVERRIDE_ENABLE = yes
 
-# Link Time Optimization (Saves space and improves compilation)
+# link time optimization (saves space and improves compilation)
 LTO_ENABLE = yes
